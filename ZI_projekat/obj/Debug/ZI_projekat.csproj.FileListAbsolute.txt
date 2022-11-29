@@ -1,0 +1,13 @@
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\bin\Debug\ZI_projekat.exe.config
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\bin\Debug\ZI_projekat.exe
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\bin\Debug\ZI_projekat.pdb
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.csproj.AssemblyReference.cache
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.csproj.SuggestedBindingRedirects.cache
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.Properties.Resources.resources
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.csproj.GenerateResource.cache
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.csproj.CoreCompileInputs.cache
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.exe
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.pdb
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.MainForm.resources
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.ChatForm.resources
+C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.EncryptForm.resources
