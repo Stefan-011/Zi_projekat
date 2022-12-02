@@ -23,8 +23,21 @@ namespace ZI_projekat
             Bifid test = new Bifid();
            test.Set_key("arikspyvxnuhfcqzemgwdbtol");
            test.GenerateKey();
-            test.Encrypt("DAB");
-        
+           char[] v = test.Encrypt("Hello there friend");
+            string tez = "\n";
+            foreach (var item in v)
+               {
+                   Console.WriteLine(item);
+               }
+           char[] z = test.Decrypt("cllckuknylmyyhhd");
+            string poruka = "\n";
+               foreach (var item in z)
+              {
+                poruka += item;
+              }
+            Console.WriteLine(poruka);
+
+
 
 
             // Encoding.ASCII.GetBytes(str) | File.ReadAllText(inputfile); | Encoding.UTF8.GetString(data); | data.SequenceEqual(bytesz)             
