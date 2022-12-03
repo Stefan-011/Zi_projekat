@@ -18,28 +18,10 @@ namespace ZI_projekat
             InitializeComponent();
             test();
         }
-        public void test()
+        public void test() //
         {
-            Bifid test = new Bifid();
-           test.Set_key("arikspyvxnuhfcqzemgwdbtol");
-           test.GenerateKey();
-           char[] v = test.Encrypt("Hello there friend");
-            string tez = "\n";
-            foreach (var item in v)
-               {
-                   Console.WriteLine(item);
-               }
-           char[] z = test.Decrypt("cllckuknylmyyhhd");
-            string poruka = "\n";
-               foreach (var item in z)
-              {
-                poruka += item;
-              }
-            Console.WriteLine(poruka);
-
-
-
-
+            Bifid test = new Bifid(); 
+    
             // Encoding.ASCII.GetBytes(str) | File.ReadAllText(inputfile); | Encoding.UTF8.GetString(data); | data.SequenceEqual(bytesz)             
             // File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt", Encoding.UTF8.GetString(t.Encrypt("Hollow world")));
             //File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Decoded.txt", Encoding.UTF8.GetString(t.Decrypt(t.Encrypt("Hollow world"))));
@@ -95,14 +77,23 @@ namespace ZI_projekat
             switch (Alg_cmbox.Text)
             {
                 case "RC6":
-                    Console.WriteLine("vreme za hacketovanje");
                     RC6 Crypter = new RC6();
                     Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     Crypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Normal.txt");
                     Crypter.EncryptFile();
                     Input_textbox.Text = Encoding.UTF8.GetString(Crypter.GetLoadedData());
-                    Crypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt");
+                    Crypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedRC6.txt");
                     Output_textbox.Text = Encoding.UTF8.GetString(Crypter.GetChangedData());
+                    break;
+                case "Bifid":
+                    Bifid BifidCrypter = new Bifid();
+                    BifidCrypter.Set_key("arikspyvxnuhfcqzemgwdbtol");
+                    BifidCrypter.GenerateKey();                
+                    BifidCrypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Normal.txt");
+                    Input_textbox.Text = (BifidCrypter.GetLoadedText());
+                    BifidCrypter.EncryptFile();
+                    Output_textbox.Text = (BifidCrypter.GetCipherText());
+                    BifidCrypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedBifid.txt");
                     break;
                 default:
                     break;
@@ -114,14 +105,23 @@ namespace ZI_projekat
             switch (Alg_cmbox.Text)
             {
                 case "RC6":
-                    Console.WriteLine("vreme za DE hacketovanje");
-                    RC6 Crypter = new RC6();
-                    Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
-                    Crypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt");
-                    Crypter.DecryptFile();
-                    Input_textbox.Text = Encoding.UTF8.GetString(Crypter.GetLoadedData());
-                    //Crypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt");
-                    Output_textbox.Text = Encoding.UTF8.GetString(Crypter.GetChangedData());
+                    RC6 RC6Crypter = new RC6();
+                    RC6Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    RC6Crypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedRC6.txt");
+                    RC6Crypter.DecryptFile();
+                    Input_textbox.Text = Encoding.UTF8.GetString(RC6Crypter.GetLoadedData());
+                    RC6Crypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\NewFileRC6.txt");
+                    Output_textbox.Text = Encoding.UTF8.GetString(RC6Crypter.GetChangedData());
+                    break;
+                case "Bifid":
+                    Bifid BifidCrypter = new Bifid();
+                    BifidCrypter.Set_key("arikspyvxnuhfcqzemgwdbtol");
+                    BifidCrypter.GenerateKey();                
+                    BifidCrypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedBifid.txt");
+                    Input_textbox.Text = (BifidCrypter.GetLoadedText());
+                    BifidCrypter.DecryptFile();
+                    Output_textbox.Text = (BifidCrypter.GetCipherText());
+                    BifidCrypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\DecodedBifid.txt");
                     break;
                 default:
                     break;

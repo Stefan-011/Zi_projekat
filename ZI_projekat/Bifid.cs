@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,17 @@ namespace ZI_projekat
         private char[,] key_square;
         private int block_size;
         private char[] key;
+        private string ReadText;
+        private string CipherText;
+
+        public string GetLoadedText()
+        {
+            return ReadText;
+        }
+        public string GetCipherText()
+        {
+            return CipherText;
+        }
 
         public void Set_block_size(int size)
         {
@@ -27,7 +39,7 @@ namespace ZI_projekat
         public Bifid()
         {
             this.key_square = new char[5, 5];
-            this.block_size = 100; // Default
+            this.block_size = 5; // Default
         }
 
         public void GenerateKey()
@@ -65,46 +77,30 @@ namespace ZI_projekat
                     }
                 }
             }
-            int n = 0;
-
-            /*    Console.WriteLine("U enkode row:\n");
-                foreach (var item in Row)
-                {
-                    Console.WriteLine(item);
-                }
-
-                 Console.WriteLine("colunm:\n");
-                 foreach (var item in Column)
-                 {
-                     Console.WriteLine(item);
-                 }*/
-
+            int block_position = 0;
             while (Cipher.Count() != Row.Count() + Column.Count())
             {
-              for (int i = 0+n; i < block_size + n; i++)
-              {
+                for (int i = 0 + block_position; i < block_size + block_position; i++) 
+                {
                    if( i < Row.Count())
                       Cipher.Add(Row[i]);
-              }
+                }
 
-              for (int j = 0+n; j < block_size + n; j++)
-              {
+                for (int j = 0 + block_position; j < block_size + block_position; j++) 
+                {
                     if (j < Column.Count())
                         Cipher.Add(Column[j]);
-              }
-                n += block_size;
+                }
+                block_position += block_size;
             }
 
             
-
             for (int i = 0; i < Cipher.Count(); i+=2)
             {
                 StringCipher.Add(key_square[Cipher[i], Cipher[i + 1]]);
             }
 
-
-            
-
+            CipherText = CharArrayToString(StringCipher.ToArray());
             return StringCipher.ToArray();
         }
 
@@ -135,19 +131,20 @@ namespace ZI_projekat
             while (Cipher.Count() != Row.Count() + Column.Count())
             {
                 int NewBlockSize = 0;
+
                 if ( 2 * block_size > Cipher.Count() - Row.Count() - Column.Count())
                 {
                     NewBlockSize = (Cipher.Count() - Row.Count() - Column.Count()) / 2;
                 }
-
-                if (NewBlockSize == 0)
+                else
                     n++;
+
                 for (int i = itr; i < block_size * n + NewBlockSize; i++, itr++)
                 {
                     if (i < Cipher.Count())
                         Row.Add(Cipher[i]);
-
                 }
+
                 if (NewBlockSize == 0)
                     n++;
                
@@ -156,30 +153,48 @@ namespace ZI_projekat
                     if (j < Cipher.Count())
                         Column.Add(Cipher[j]);
                 }
+
                 if(NewBlockSize != 0)
                     n++;
-
             }
-
-            /*   Console.WriteLine("U dekocde row:\n");
-               foreach (var item in Row)
-               {
-                   Console.WriteLine(item);
-               }
-
-               Console.WriteLine("colunm:\n");
-               foreach (var item in Column)
-               {
-                   Console.WriteLine(item);
-               }*/
 
             for (int i = 0; i < Row.Count(); i++)
             {
                 StringCipher.Add(key_square[Row[i], Column[i]]);
             }
 
-
+            CipherText = CharArrayToString(StringCipher.ToArray());
             return StringCipher.ToArray();
+        }
+
+        public void ReadFile(string filepath)
+        {
+           ReadText = File.ReadAllText(filepath, Encoding.UTF8);
+        }
+
+        public void SaveFile(string filepath)
+        {
+            File.WriteAllText(filepath, CipherText);
+        }
+
+        public void EncryptFile()
+        {
+            Encrypt(ReadText);
+        }
+
+        public void DecryptFile()
+        {
+            Decrypt(ReadText);
+        }
+
+        private string CharArrayToString(char[] array)
+        {
+            string str = "";
+            foreach (var item in array)
+            {
+                str += item;
+            }
+            return str;
         }
     }
 }
