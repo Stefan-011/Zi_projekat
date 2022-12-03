@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,11 +30,58 @@ namespace ZI_projekat
             }
             
            test.Decrypt("193 76 169");
-    
+
+            var bmp = (Bitmap)Image.FromFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline.bmp");
+            ImageConverter converter = new ImageConverter();
+            byte[] byteText = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
+            RC6 bmt = new RC6();
+
+            byte[] z =   bmt.EncryptBITMAP(bmp);
+
+            Console.WriteLine("Enkriptovano:\n");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine(z[i]);
+            }
+
+            File.WriteAllBytes(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline222.bmp", z);
+
+            /*  MemoryStream ms = new MemoryStream(byteText);
+              Image convertImage = Image.FromStream(ms);
+              convertImage.Save(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline222.bmp");*/
+            Bitmap tobedecoded = (Bitmap)Image.FromFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline222.bmp");
+
+           
+            var dec = bmt.DecryptBitmap(tobedecoded);
+            Console.WriteLine("Dekriptovano:\n");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine(dec[i]);
+            }
+
+
+            File.WriteAllBytes(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontlineDECECE.bmp", dec);
+
+            Console.WriteLine("Origigi:\n");
+          
+            for (int i = 0; i < 5; i++)
+            {
+              Console.WriteLine(byteText[i]);
+            }
+
+            
+
+
+
             // Encoding.ASCII.GetBytes(str) | File.ReadAllText(inputfile); | Encoding.UTF8.GetString(data); | data.SequenceEqual(bytesz)             
             // File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt", Encoding.UTF8.GetString(t.Encrypt("Hollow world")));
             //File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Decoded.txt", Encoding.UTF8.GetString(t.Decrypt(t.Encrypt("Hollow world"))));
         }
+
+
+       
+
+
 
         public byte[] citajbitar(string filenamez)
         {
