@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,28 @@ namespace ZI_projekat
             m;
         private int[] public_key;
         private int[] private_key;
+        private byte[] ReadBinary;
+        private int[] CipherInt;
+        private string ReadText;
+        private string CipherText;
+        
+
+        public string GetReadText()
+        {
+            return ReadText;
+        }
+        public byte[] GetReadBinary()
+        {
+            return ReadBinary;
+        }
+        public int[] GetCipherInt()
+        {
+            return CipherInt;
+        }
+        public string GetCipherText()
+        {
+            return CipherText;
+        }
 
         public Knapsack()
         {
@@ -45,13 +68,14 @@ namespace ZI_projekat
             }
         }
 
-        public int[] Encrypt(string PlainText)
+        public int[] Encrypt(byte[] PlainText)
         {
-            byte[] RawBytes = Encoding.ASCII.GetBytes(PlainText);
-            
+            //byte[] RawBytes = Encoding.ASCII.GetBytes(PlainText);
+            byte[] RawBytes = PlainText;
             int 
                 size = private_key.Length,
-                n = 0;
+                blockJump = 0;
+
             List<int> Sums = new List<int>();
             List<byte> clearbytes = new List<byte>();
             foreach(byte b in RawBytes)
@@ -60,65 +84,46 @@ namespace ZI_projekat
                     clearbytes.Add(b);
             }
 
-
-            /*  while (n + size < byteText.Length)
-              {
-                  int Mini_sum = 0;
-                  for (int i = 0 + n; i < size + n; i++)
-                  {
-                      Mini_sum += byteText[i] * public_key[i - n];
-                  }
-                  Sums.Add(Mini_sum);
-                  n += size;
-              }*/
-            /*   Console.WriteLine("enc\n");
-               foreach (var item in byteText)
-               {
-                   Console.WriteLine(item);
-               }*/
-            while (n + size <= clearbytes.Count())
+            while (blockJump + size <= clearbytes.Count())
             {
                 int Mini_sum = 0;
-                for (int i = 0 + n; i < size + n; i++)
+                for (int i = 0 + blockJump; i < size + blockJump; i++)
                 {
                     if(clearbytes[i] == 49)
-                    Mini_sum += 1 * public_key[i - n];
+                    Mini_sum += 1 * public_key[i - blockJump];
                 }
                 Sums.Add(Mini_sum);
-                n += size;
+                blockJump += size;
             }
-
-            
-
+         
             return Sums.ToArray();
         }
 
-        public int[] Decrypt(string PlainText)
+        public string Decrypt(string PlainText)
         {
             int InverseModuo = FindInverseModuo(n, m);
             
-          string[] itez =  PlainText.Split(' ');
+          string[] Numbers =  PlainText.Split(' ');
           List<int> Array = new List<int>();
           List<string> byteList = new List<string>();
-            List<int[]> nesto = new List<int[]>();
-            foreach (var item in itez)
+          List<int[]> Helper = new List<int[]>();
+            foreach (var item in Numbers)
             {
+                if(item != "")
                 Array.Add(int.Parse(item));
             }
 
             for (int i = 0; i < Array.Count(); i++)
             {
                 Array[i]= (Array[i] * InverseModuo) % m;
-                nesto.Add(test(Array[i]));
-                // Console.WriteLine(Array[i]);
-                //{1, 2, 4, 10, 20, 40}. 
+                Helper.Add(GetOnes(Array[i]));
             }
             string str = "";
-            for (int i = 0; i < nesto.Count(); i++)
+            for (int i = 0; i < Helper.Count(); i++)
             {
                 for (int j = 0; j < private_key.Length; j++)
                 {
-                    if (DoesContain(private_key[j], nesto[i].ToArray()) == true)
+                    if (DoesContain(private_key[j], Helper[i].ToArray()) == true)
                     {
                         str += "1";
                     }
@@ -127,16 +132,7 @@ namespace ZI_projekat
                 }
                 str += " ";
             }
-            Console.WriteLine(str);
-
-
-            Console.WriteLine("dec\n");
-            foreach(var item in byteList)
-            {
-                Console.WriteLine(item);
-            }
-            
-            return new int[2];
+            return str;
         }
 
         private int FindInverseModuo(int n,int m)
@@ -150,7 +146,7 @@ namespace ZI_projekat
             return  im;
         }
 
-        private int[] test(int broj)
+        private int[] GetOnes(int broj)
         {
             int sum = 0;
             List<int> list = new List<int>();
@@ -168,12 +164,44 @@ namespace ZI_projekat
         private bool DoesContain(int find, int[] array)
         {
             foreach (var item in array)
-            {
                 if (find == item)
                     return true;
-            }
-
             return false;
+        }
+
+        public void ReadFile(string filepath)
+        {
+            ReadBinary = File.ReadAllBytes(filepath);
+            ReadText = Encoding.UTF8.GetString(ReadBinary);
+        }
+
+        public void EncryptFile()
+        {
+            CipherInt = Encrypt(ReadBinary);
+            CipherText = null;
+        }
+
+        public void DecryptFile()
+        {
+            CipherText = Decrypt(ReadText);
+            CipherInt = null;
+        }
+
+        public void SaveFile(string filepath)
+        {
+            string str = "";
+            if(CipherInt != null)
+                foreach (var item in CipherInt)
+                {
+                    str += item + " ";
+                }
+            else if (CipherText != null)
+                foreach (var item in CipherText)
+                {
+                    str += item + "";
+                }
+
+            File.WriteAllText(filepath, str);
         }
    
     }

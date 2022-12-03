@@ -18,6 +18,8 @@ namespace ZI_projekat
         private static uint[] Key = new uint[2 * R + 4];
         private byte[] LoadedData;
         private byte[] ChangedData;
+        private Bitmap LoadedBitmap;
+        //private Bitmap ChangedBitmap;
 
 
         public byte[] GetLoadedData()
@@ -243,7 +245,7 @@ namespace ZI_projekat
             }
         }
 
-        public byte[] EncryptBITMAP(Bitmap bmp)
+        private byte[] EncryptBITMAP(Bitmap bmp)
         {
             uint A, B, C, D;
             ImageConverter converter = new ImageConverter();
@@ -299,7 +301,7 @@ namespace ZI_projekat
             return cipherText;
         }
 
-        public byte[] DecryptBitmap(Bitmap bmp)
+        private byte[] DecryptBitmap(Bitmap bmp)
         {
             ImageConverter converter = new ImageConverter();
             byte[] byteText = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
@@ -317,6 +319,21 @@ namespace ZI_projekat
             return ret;
         }
 
+        public void EcryptAndSaveBitmap(string filename)
+        {
+            byte[] EcryptedBitmap = EncryptBITMAP(LoadedBitmap);
+            File.WriteAllBytes(filename, EcryptedBitmap);
+        }
 
+        public void ReadBitmap(string filename)
+        {
+            LoadedBitmap = (Bitmap)Image.FromFile(filename);
+        }
+
+        public void DecryptAndSaveBitmap(string filename)
+        {
+            byte[] EcryptedBitmap = DecryptBitmap(LoadedBitmap);
+            File.WriteAllBytes(filename, EcryptedBitmap);
+        }
     }
 }

@@ -14,6 +14,12 @@ namespace ZI_projekat
 {
     public partial class EncryptForm : Form
     {
+       private string 
+            LoadedFilePath,
+            LoadedFileName,
+            PathToSave;
+
+
         public EncryptForm()
         {
             InitializeComponent();
@@ -23,51 +29,22 @@ namespace ZI_projekat
         {
             Knapsack test = new Knapsack();
             test.GenerateKeys(1, 5);
-            int [] t = test.Encrypt("11101 00100 11100");
-            foreach (var item in t)
-            {
-                Console.WriteLine(item);
-            }
-            
-           test.Decrypt("193 76 169");
+            // int [] t = test.Encrypt("11101 00100 11100");
+         /*   test.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\NormalBinary.txt");
+            test.EncryptFile();
+            test.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedKnapsack.txt");*/
 
-            var bmp = (Bitmap)Image.FromFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline.bmp");
-            ImageConverter converter = new ImageConverter();
-            byte[] byteText = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
-            RC6 bmt = new RC6();
+            test.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedKnapsack.txt");
+            test.DecryptFile();
+            test.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\DecodedKnapsack.txt");
+            /*  foreach (var item in t)
+              {
+                  Console.WriteLine(item);
+              }*/
 
-            byte[] z =   bmt.EncryptBITMAP(bmp);
+            test.Decrypt("193 76 169");
 
-            Console.WriteLine("Enkriptovano:\n");
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine(z[i]);
-            }
-
-            File.WriteAllBytes(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline222.bmp", z);
-
-            /*  MemoryStream ms = new MemoryStream(byteText);
-              Image convertImage = Image.FromStream(ms);
-              convertImage.Save(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline222.bmp");*/
-            Bitmap tobedecoded = (Bitmap)Image.FromFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontline222.bmp");
-
-           
-            var dec = bmt.DecryptBitmap(tobedecoded);
-            Console.WriteLine("Dekriptovano:\n");
-            for (int i = 0; i < 5; i++)
-            {
-                Console.WriteLine(dec[i]);
-            }
-
-
-            File.WriteAllBytes(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\frontlineDECECE.bmp", dec);
-
-            Console.WriteLine("Origigi:\n");
-          
-            for (int i = 0; i < 5; i++)
-            {
-              Console.WriteLine(byteText[i]);
-            }
+       
 
             
 
@@ -135,21 +112,45 @@ namespace ZI_projekat
                 case "RC6":
                     RC6 Crypter = new RC6();
                     Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
-                    Crypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Normal.txt");
-                    Crypter.EncryptFile();
+                    Crypter.ReadFile(LoadedFilePath);
+                    Crypter.EncryptFile();                   
+                    Crypter.SaveFile(@""+PathToSave+"EncodedRC6.txt");
+
                     Input_textbox.Text = Encoding.UTF8.GetString(Crypter.GetLoadedData());
-                    Crypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedRC6.txt");
                     Output_textbox.Text = Encoding.UTF8.GetString(Crypter.GetChangedData());
                     break;
                 case "Bifid":
                     Bifid BifidCrypter = new Bifid();
                     BifidCrypter.Set_key("arikspyvxnuhfcqzemgwdbtol");
                     BifidCrypter.GenerateKey();                
-                    BifidCrypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Normal.txt");
-                    Input_textbox.Text = (BifidCrypter.GetLoadedText());
+                    BifidCrypter.ReadFile(LoadedFilePath);
                     BifidCrypter.EncryptFile();
+                    BifidCrypter.SaveFile(@"" + PathToSave + "EncodedBifid.txt");
+
+                    Input_textbox.Text = (BifidCrypter.GetLoadedText());                 
                     Output_textbox.Text = (BifidCrypter.GetCipherText());
-                    BifidCrypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedBifid.txt");
+                 
+                    break;
+                case "Knapsack":
+                    Knapsack KnapsackCrypter = new Knapsack();
+                    KnapsackCrypter.GenerateKeys(1, 5);
+                    KnapsackCrypter.ReadFile(LoadedFilePath);
+                    KnapsackCrypter.EncryptFile();
+                    KnapsackCrypter.SaveFile(@"" + PathToSave + "EncodedKnapsack.txt");
+                    Input_textbox.Text = Encoding.UTF8.GetString(KnapsackCrypter.GetReadBinary());
+                    string output = "";
+                    foreach (var item in KnapsackCrypter.GetCipherInt())
+                    {
+                        output += item+" ";
+                    }
+                    Output_textbox.Text = output;
+                    break;
+                case "Bitmap (+PC6)":
+                    RC6 BitmapCrypter = new RC6();
+                    BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    BitmapCrypter.ReadBitmap(LoadedFilePath);
+                    BitmapCrypter.EcryptAndSaveBitmap(@"" + PathToSave + "SuspiciousBitmap.bmp");
+
                     break;
                 default:
                     break;
@@ -163,28 +164,74 @@ namespace ZI_projekat
                 case "RC6":
                     RC6 RC6Crypter = new RC6();
                     RC6Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
-                    RC6Crypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedRC6.txt");
+                    RC6Crypter.ReadFile(LoadedFilePath);
                     RC6Crypter.DecryptFile();
-                    Input_textbox.Text = Encoding.UTF8.GetString(RC6Crypter.GetLoadedData());
-                    RC6Crypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\NewFileRC6.txt");
+                    RC6Crypter.SaveFile(@"" + PathToSave + "DecodedRC6.txt");
+
+                    Input_textbox.Text = Encoding.UTF8.GetString(RC6Crypter.GetLoadedData());                   
                     Output_textbox.Text = Encoding.UTF8.GetString(RC6Crypter.GetChangedData());
+
                     break;
                 case "Bifid":
                     Bifid BifidCrypter = new Bifid();
                     BifidCrypter.Set_key("arikspyvxnuhfcqzemgwdbtol");
                     BifidCrypter.GenerateKey();                
-                    BifidCrypter.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedBifid.txt");
-                    Input_textbox.Text = (BifidCrypter.GetLoadedText());
+                    BifidCrypter.ReadFile(LoadedFilePath);                  
                     BifidCrypter.DecryptFile();
+                    BifidCrypter.SaveFile(@"" + PathToSave + "DecodedBifid.txt");
+
+                    Input_textbox.Text = (BifidCrypter.GetLoadedText());
                     Output_textbox.Text = (BifidCrypter.GetCipherText());
-                    BifidCrypter.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\DecodedBifid.txt");
+                    
+                    break;
+                case "Knapsack":
+                    Knapsack KnapsackCrypter = new Knapsack();
+                    KnapsackCrypter.GenerateKeys(1, 5);
+                    KnapsackCrypter.ReadFile(LoadedFilePath);
+                    KnapsackCrypter.DecryptFile();
+                    KnapsackCrypter.SaveFile(@"" + PathToSave + "DecodedKnapsack.txt");
+
+                    Input_textbox.Text = (KnapsackCrypter.GetReadText());
+                    string output= "";
+                    foreach (var item in KnapsackCrypter.GetCipherText())
+                    {
+                        output += item;
+                    }
+                    Output_textbox.Text = output;
+                    break;
+                case "Bitmap (+PC6)":
+                    RC6 BitmapCrypter = new RC6();
+                    BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    BitmapCrypter.ReadBitmap(LoadedFilePath);
+                    BitmapCrypter.DecryptAndSaveBitmap(@"" + PathToSave + "NewBitmap.bmp");
                     break;
                 default:
                     break;
             }
         }
 
+       
 
+        private void open_file_btn_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+            LoadedFilePath = openFileDialog.FileName;
+            string[] list = LoadedFilePath.Split('\\');
+            LoadedFileName = list[list.Length - 1];
+            list[list.Length - 1] = "";
+            label_loaded_file.Text = LoadedFileName;
+
+            PathToSave  = "";
+            foreach (var item in list)
+            {
+                if(item != "")
+                PathToSave += item+"\\";
+            }
+
+            Console.WriteLine(LoadedFileName);
+            Console.WriteLine(LoadedFilePath);
+            Console.WriteLine(PathToSave);
+        }
     }
    
 }
