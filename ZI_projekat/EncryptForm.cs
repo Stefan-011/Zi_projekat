@@ -20,7 +20,15 @@ namespace ZI_projekat
         }
         public void test() //
         {
-            Bifid test = new Bifid(); 
+            Knapsack test = new Knapsack();
+            test.GenerateKeys(1, 5);
+            int [] t = test.Encrypt("11101 00100 11100");
+            foreach (var item in t)
+            {
+                Console.WriteLine(item);
+            }
+            
+           test.Decrypt("193 76 169");
     
             // Encoding.ASCII.GetBytes(str) | File.ReadAllText(inputfile); | Encoding.UTF8.GetString(data); | data.SequenceEqual(bytesz)             
             // File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt", Encoding.UTF8.GetString(t.Encrypt("Hollow world")));
