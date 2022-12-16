@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ZI_projekat
 {
+    // referenca https://www.geeksforgeeks.org/bifid-cipher-in-cryptography/
     internal class Bifid
     {
         private char[,] key_square;
