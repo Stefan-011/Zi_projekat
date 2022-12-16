@@ -27,6 +27,8 @@ namespace ZI_projekat
         }
         public void test() //
         {
+            Tiger_hash test = new Tiger_hash();
+            test.LoadMainFile();
             
         }
 

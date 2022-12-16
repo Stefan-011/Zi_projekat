@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,13 @@ namespace ZI_projekat
         public ulong dataSize;
         private ulong[] x;
         private int blockHashed;
+
+        private byte[] 
+        LoadedData,
+        HashedData,
+        LoadedToCompare,
+        ToCompareHash;
+
         public int GetBlockHashed() 
         { return blockHashed; }
 
@@ -57,11 +65,11 @@ namespace ZI_projekat
 
         public void SetupX(byte[] msgBlk)
         {
-            for( int i = 0; i < msgBlk.Length; i++)
+            for( int i = 0; i < 8; i++)
                 x[i] = msgBlk[i];
         }
 
-        public void SetupKey()
+        public void KeySchedule()
         {
             x[0] -= x[7] ^ 0xA5A5A5A5A5A5A5A5;
             x[1] ^= x[0];
@@ -114,9 +122,9 @@ namespace ZI_projekat
             CC = C;
 
             Pass(ref this.A, ref this.B, ref this.C, 5);
-            SetupKey();
+            KeySchedule();
             Pass(ref this.C, ref this.A, ref this.B, 7);
-            SetupKey();
+            KeySchedule();
             Pass(ref this.B, ref this.C, ref this.A, 9);
 
             A ^= AA;
@@ -206,6 +214,61 @@ namespace ZI_projekat
 
             return result;
         }
+
+        private byte[] LoadFile(string filename)
+        {
+            Byte[] buffer = null;
+
+            var fileName = @"C:\Users\Stefan\Desktop\Projects\ZI_projekat\Zi_projekat\Zi_projekat\Fajlovi\"+filename;
+            try
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+
+                long numBytes = new FileInfo(fileName).Length;
+                buffer = br.ReadBytes((int)numBytes);
+
+                br.Close();
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return buffer;
+        }
+
+        public void LoadFileToCompare()
+        {
+
+        }
+
+        public void LoadMainFile()
+        {
+            LoadedData = LoadFile("Normal.txt");
+           byte[]  LS1 = Hash(LoadedData, LoadedData.Length);
+            LoadedToCompare = LoadFile("EncodedBifid.txt");
+            byte[] LS2 = Hash(LoadedData, LoadedData.Length);
+
+            Console.WriteLine(LS1.SequenceEqual(LS2));
+        }
+
+        public void HashLoadedFile()
+        {
+
+        }
+
+        public void HashToCompareFile()
+        {
+
+        }
+
+        public bool CompareHashs()
+        {
+            return HashedData.SequenceEqual(ToCompareHash);
+        }
+
 
 
 
