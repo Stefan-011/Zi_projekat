@@ -33,6 +33,11 @@ namespace ZI_projekat
 
         public Tiger_hash()
         {
+            InitializeValues();
+        }
+
+        public void InitializeValues()
+        {
             A = 0x0123456789ABCDEF;
             B = 0xFEDCBA9876543210;
             C = 0xF096A5B4C3B2E187;
@@ -181,7 +186,9 @@ namespace ZI_projekat
 
 
         public byte[] Hash(byte[] array, int numOfBytes)
-        { 
+        {
+            InitializeValues();
+
             int numOfMessageBlocks = numOfBytes / msgBlkSizeByte;
 
             for (int i = 0; i < numOfMessageBlocks; i++)
@@ -215,11 +222,11 @@ namespace ZI_projekat
             return result;
         }
 
-        private byte[] LoadFile(string filename)
+        private byte[] LoadFile(string filepath)
         {
             Byte[] buffer = null;
 
-            var fileName = @"C:\Users\Stefan\Desktop\Projects\ZI_projekat\Zi_projekat\Zi_projekat\Fajlovi\"+filename;
+            var fileName = filepath;
             try
             {
                 FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -239,33 +246,28 @@ namespace ZI_projekat
             return buffer;
         }
 
-        public void LoadFileToCompare()
+        public void LoadFileToCompare(string filename)
         {
-
+            LoadedToCompare = LoadFile(filename);
         }
 
-        public void LoadMainFile()
+        public void LoadMainFile(string filename)
         {
-            LoadedData = LoadFile("Normal.txt");
-           byte[]  LS1 = Hash(LoadedData, LoadedData.Length);
-            LoadedToCompare = LoadFile("EncodedBifid.txt");
-            byte[] LS2 = Hash(LoadedData, LoadedData.Length);
-
-            Console.WriteLine(LS1.SequenceEqual(LS2));
+            LoadedData = LoadFile(filename);
         }
 
         public void HashLoadedFile()
         {
-
+            HashedData = Hash(LoadedData, LoadedData.Length);
         }
 
         public void HashToCompareFile()
         {
-
+            ToCompareHash = Hash(LoadedToCompare, LoadedToCompare.Length);
         }
 
         public bool CompareHashs()
-        {
+        {          
             return HashedData.SequenceEqual(ToCompareHash);
         }
 

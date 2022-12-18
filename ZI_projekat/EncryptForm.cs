@@ -17,18 +17,24 @@ namespace ZI_projekat
        private string 
             LoadedFilePath,
             LoadedFileName,
-            PathToSave;
+            PathToSave,
+            LoadedFilePath2,
+            LoadedFileName2;
 
 
         public EncryptForm()
         {
             InitializeComponent();
+            label_loaded_file2.Visible = false;
+            open_file_btn2.Visible = false;
+            Compare_btn.Visible = false;
             test();
         }
         public void test() //
         {
             Tiger_hash test = new Tiger_hash();
-            test.LoadMainFile();
+           // test.LoadMainFile();
+
             
         }
 
@@ -134,6 +140,46 @@ namespace ZI_projekat
             }
         }
 
+        private void Alg_cmbox_TextChanged(object sender, EventArgs e)
+        {
+            if ( Alg_cmbox.Text == "Tiger hash")
+            {
+                label_loaded_file2.Visible = true;
+                open_file_btn2.Visible = true;
+                Decrypt_btn.Visible = false;
+                Encrypt_btn.Visible = false;
+                Compare_btn.Visible = true;
+            }
+            else
+            {
+                label_loaded_file2.Visible = false;
+                open_file_btn2.Visible = false;
+                Decrypt_btn.Visible = true;
+                Encrypt_btn.Visible = true;
+                Compare_btn.Visible = false;
+            }
+        }
+
+        private void Compare_btn_Click(object sender, EventArgs e)
+        {
+           
+            if(LoadedFilePath2 != "" && LoadedFilePath != "" && LoadedFilePath2 != null && LoadedFilePath != null)
+            {
+                Tiger_hash HashObj = new Tiger_hash();
+                HashObj.LoadMainFile(LoadedFilePath);
+                HashObj.LoadFileToCompare(LoadedFilePath2);
+                HashObj.HashLoadedFile();
+                HashObj.HashToCompareFile();
+                if (HashObj.CompareHashs())
+                    MessageBox.Show("FILES ARE SAME");
+                else
+                    MessageBox.Show("FILES ARE NOT THE SAME");
+            }
+
+        }
+
+     
+
         private void Decrypt_btn_Click(object sender, EventArgs e)
         {
             switch (Alg_cmbox.Text)
@@ -193,6 +239,11 @@ namespace ZI_projekat
         {
             openFileDialog.ShowDialog();
             LoadedFilePath = openFileDialog.FileName;
+
+            if (LoadedFilePath == "openFileDialog")
+                return;
+
+
             string[] list = LoadedFilePath.Split('\\');
             LoadedFileName = list[list.Length - 1];
             list[list.Length - 1] = "";
@@ -208,6 +259,31 @@ namespace ZI_projekat
             Console.WriteLine(LoadedFileName);
             Console.WriteLine(LoadedFilePath);
             Console.WriteLine(PathToSave);
+        }
+
+        private void open_file_btn2_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            LoadedFilePath2 = openFileDialog1.FileName;
+
+            if (LoadedFilePath2 == "openFileDialog")
+                return;
+
+
+            string[] list = LoadedFilePath2.Split('\\');
+            LoadedFileName2 = list[list.Length - 1];
+            list[list.Length - 1] = "";
+            label_loaded_file2.Text = LoadedFileName2;
+
+            PathToSave = "";
+            foreach (var item in list)
+            {
+                if (item != "")
+                    PathToSave += item + "\\";
+            }
+
+            Console.WriteLine(LoadedFileName2);
+            Console.WriteLine(LoadedFilePath2);
         }
     }
    

@@ -36,6 +36,10 @@
             this.open_file_btn = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label_loaded_file = new System.Windows.Forms.Label();
+            this.open_file_btn2 = new System.Windows.Forms.Button();
+            this.label_loaded_file2 = new System.Windows.Forms.Label();
+            this.Compare_btn = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // Input_textbox
@@ -65,11 +69,13 @@
             "Bifid",
             "Knapsack",
             "CTR",
-            "Bitmap (+PC6)"});
+            "Bitmap (+PC6)",
+            "Tiger hash"});
             this.Alg_cmbox.Location = new System.Drawing.Point(38, 43);
             this.Alg_cmbox.Name = "Alg_cmbox";
             this.Alg_cmbox.Size = new System.Drawing.Size(170, 32);
             this.Alg_cmbox.TabIndex = 2;
+            this.Alg_cmbox.TextChanged += new System.EventHandler(this.Alg_cmbox_TextChanged);
             // 
             // Encrypt_btn
             // 
@@ -118,11 +124,50 @@
             this.label_loaded_file.TabIndex = 6;
             this.label_loaded_file.Text = "Empty";
             // 
+            // open_file_btn2
+            // 
+            this.open_file_btn2.Font = new System.Drawing.Font("Lexend SemiBold", 12.25F, System.Drawing.FontStyle.Bold);
+            this.open_file_btn2.Location = new System.Drawing.Point(246, 387);
+            this.open_file_btn2.Name = "open_file_btn2";
+            this.open_file_btn2.Size = new System.Drawing.Size(140, 35);
+            this.open_file_btn2.TabIndex = 7;
+            this.open_file_btn2.Text = "Load file";
+            this.open_file_btn2.UseVisualStyleBackColor = true;
+            this.open_file_btn2.Click += new System.EventHandler(this.open_file_btn2_Click);
+            // 
+            // label_loaded_file2
+            // 
+            this.label_loaded_file2.AutoSize = true;
+            this.label_loaded_file2.Font = new System.Drawing.Font("Lexend Medium", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_loaded_file2.Location = new System.Drawing.Point(242, 352);
+            this.label_loaded_file2.Name = "label_loaded_file2";
+            this.label_loaded_file2.Size = new System.Drawing.Size(56, 21);
+            this.label_loaded_file2.TabIndex = 8;
+            this.label_loaded_file2.Text = "Empty";
+            // 
+            // Compare_btn
+            // 
+            this.Compare_btn.Font = new System.Drawing.Font("Lexend SemiBold", 12.25F, System.Drawing.FontStyle.Bold);
+            this.Compare_btn.Location = new System.Drawing.Point(138, 277);
+            this.Compare_btn.Name = "Compare_btn";
+            this.Compare_btn.Size = new System.Drawing.Size(160, 40);
+            this.Compare_btn.TabIndex = 9;
+            this.Compare_btn.Text = "Compare";
+            this.Compare_btn.UseVisualStyleBackColor = true;
+            this.Compare_btn.Click += new System.EventHandler(this.Compare_btn_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog";
+            // 
             // EncryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Compare_btn);
+            this.Controls.Add(this.label_loaded_file2);
+            this.Controls.Add(this.open_file_btn2);
             this.Controls.Add(this.label_loaded_file);
             this.Controls.Add(this.open_file_btn);
             this.Controls.Add(this.Decrypt_btn);
@@ -147,5 +192,9 @@
         private System.Windows.Forms.Button open_file_btn;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label label_loaded_file;
+        private System.Windows.Forms.Button open_file_btn2;
+        private System.Windows.Forms.Label label_loaded_file2;
+        private System.Windows.Forms.Button Compare_btn;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
