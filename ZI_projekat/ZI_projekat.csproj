@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bifid.cs" />
+    <Compile Include="CTR.cs" />
     <Compile Include="EncryptForm.cs">
       <SubType>Form</SubType>
     </Compile>

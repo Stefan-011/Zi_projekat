@@ -68,8 +68,8 @@
             "RC6",
             "Bifid",
             "Knapsack",
-            "CTR",
-            "Bitmap (+PC6)",
+            "CTR (+ RC6)",
+            "Bitmap (+RC6)",
             "Tiger hash"});
             this.Alg_cmbox.Location = new System.Drawing.Point(38, 43);
             this.Alg_cmbox.Name = "Alg_cmbox";

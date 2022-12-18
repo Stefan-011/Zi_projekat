@@ -15,12 +15,16 @@ namespace ZI_projekat
         private int
             n,
             m;
-        private int[] public_key;
-        private int[] private_key;
+        private int[] 
+            public_key, 
+            private_key, 
+            CipherInt;   
+
         private byte[] ReadBinary;
-        private int[] CipherInt;
-        private string ReadText;
-        private string CipherText;
+        
+        private string 
+            ReadText, 
+            CipherText;
         
 
         public string GetReadText()

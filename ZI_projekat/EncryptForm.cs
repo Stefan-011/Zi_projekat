@@ -32,7 +32,8 @@ namespace ZI_projekat
         }
         public void test() //
         {
-            Tiger_hash test = new Tiger_hash();
+            CTR test = new CTR();
+            test.Encrypt();
            // test.LoadMainFile();
 
             
