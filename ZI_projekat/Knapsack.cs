@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ZI_projekat
 {
+    // referenca https://www.geeksforgeeks.org/knapsack-encryption-algorithm-in-cryptography/
+
+  
     internal class Knapsack
     {
         private int

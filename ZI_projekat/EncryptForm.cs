@@ -27,32 +27,9 @@ namespace ZI_projekat
         }
         public void test() //
         {
-            Knapsack test = new Knapsack();
-            test.GenerateKeys(1, 5);
-            // int [] t = test.Encrypt("11101 00100 11100");
-         /*   test.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\NormalBinary.txt");
-            test.EncryptFile();
-            test.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedKnapsack.txt");*/
-
-            test.ReadFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\EncodedKnapsack.txt");
-            test.DecryptFile();
-            test.SaveFile(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\DecodedKnapsack.txt");
-            /*  foreach (var item in t)
-              {
-                  Console.WriteLine(item);
-              }*/
-
-            test.Decrypt("193 76 169");
-
-       
-
+            Tiger_hash test = new Tiger_hash();
+            test.LoadMainFile();
             
-
-
-
-            // Encoding.ASCII.GetBytes(str) | File.ReadAllText(inputfile); | Encoding.UTF8.GetString(data); | data.SequenceEqual(bytesz)             
-            // File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Encoded.txt", Encoding.UTF8.GetString(t.Encrypt("Hollow world")));
-            //File.WriteAllText(@"C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\Fajlovi\Decoded.txt", Encoding.UTF8.GetString(t.Decrypt(t.Encrypt("Hollow world"))));
         }
 
 
