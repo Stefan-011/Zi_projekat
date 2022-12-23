@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ZI_projekat
 {
-    // referenca https://www.youtube.com/watch?v=_QLU1CdgSE4
+    // reference:
+    // https://www.youtube.com/watch?v=_QLU1CdgSE4 
+    // https://cryptobook.nakov.com/symmetric-key-ciphers/cipher-block-modes
 
     internal class CTR
     {
@@ -16,7 +19,8 @@ namespace ZI_projekat
 
         private RC6 AES;
         private string key;
-        private byte[] TEST;
+        private byte[] LoadedData;
+        private byte[] CryptedData;
 
         public CTR()
         {
@@ -24,6 +28,12 @@ namespace ZI_projekat
             Counter = 0;
             AES = new RC6();
             key = "aaaaccccbbbbeeee";
+        }
+
+        public void SetKey(string NewKey)
+        {
+            if(NewKey.Length != 0)
+            this.key = NewKey;
         }
 
         public void Encrypt()
@@ -41,7 +51,7 @@ namespace ZI_projekat
                 for (int i = Counter  * 16,j = 0; i < (Counter + 1) * 16; i++,j++)
                 {
                     if( i < plainBytes.Count())
-                    plainByteExit.Add((byte)(Result[j] ^ plainBytes[i]));
+                        plainByteExit.Add((byte)(Result[j] ^ plainBytes[i]));
                     else
                         plainByteExit.Add(Result[j]);
                 }
@@ -51,7 +61,7 @@ namespace ZI_projekat
             }
 
             Console.WriteLine(plainByteExit.Count);
-            TEST = plainByteExit.ToArray();
+            CryptedData = plainByteExit.ToArray();
             this.Decrypt();
 
         }
@@ -59,7 +69,7 @@ namespace ZI_projekat
         public void Decrypt()
         {
 
-            int BrojBlokova = GetBlockNumber(TEST.Length);
+            int BrojBlokova = GetBlockNumber(LoadedData.Length);
 
             this.Counter = 0;
             byte[] SumBytes = BitConverter.GetBytes(this.Counter + this.Nonce);
@@ -74,8 +84,8 @@ namespace ZI_projekat
 
                 for (int i = Counter * 16, j = 0; i < (Counter + 1) * 16; i++, j++)
                 {
-                    if (i < TEST.Count())
-                        plainByteExit.Add((byte)(Result[j] ^ TEST[i]));
+                    if (i < LoadedData.Count())
+                        plainByteExit.Add((byte)(Result[j] ^ LoadedData[i]));
                     else
                         plainByteExit.Add(Result[j]);
                 }
@@ -89,11 +99,11 @@ namespace ZI_projekat
                 if(item !=0 )
                     exit.Add(item);
             }
-          
+
+            CryptedData = exit.ToArray();
             Console.WriteLine(Encoding.ASCII.GetString(exit.ToArray()));
 
 
-            //Console.WriteLine(SumBytes.Length);
         }
 
         public int GetBlockNumber(int bytes_count)
