@@ -15,64 +15,14 @@ namespace ZI_projekat
 {
     public partial class MainForm : Form
     {
-        private TcpClient client;
-        public StreamReader STR;
-        public StreamWriter STW;
-        public string recieve;
-        public string TextToSend;
+  
         private Form currentChildForm;
 
         public MainForm()
         {
-            InitializeComponent();
-
-            IPAddress[] localIP = Dns.GetHostAddresses(Dns.GetHostName());
-
-            foreach (IPAddress adress in localIP)
-            {
-                if (adress.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    //ServerIPtextBox.Text = adress.ToString();
-                }
-            }
+            InitializeComponent();           
         }
-
-        private void Server()
-        {
-            int port = 80;
-            TcpListener listener = new TcpListener(IPAddress.Any, port);
-            listener.Start();
-            client = listener.AcceptTcpClient();
-            STR = new StreamReader(client.GetStream());
-            STW = new StreamWriter(client.GetStream());
-            STW.AutoFlush = true;
-            /*backgroundWorker1.RunWorkerAsync();
-             * backgroundWorker2.WorkerSupportsCancellation = true;
-             */
-        }
-
-        private void Client()
-        {
-            string IP = "127.0.0.1";
-            int port = 80;
-            client = new TcpClient();
-            IPEndPoint IpEnd = new IPEndPoint(IPAddress.Parse(IP), port);
-            try
-            {
-                STR = new StreamReader(client.GetStream());
-                STW = new StreamWriter(client.GetStream());
-                STW.AutoFlush = true;
-                /*backgroundWorker1.RunWorkerAsync();
-             * backgroundWorker2.WorkerSupportsCancellation = true;
-             */
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            
-        }
+     
 
         private void OpenChildForm(Form childForm)
         {

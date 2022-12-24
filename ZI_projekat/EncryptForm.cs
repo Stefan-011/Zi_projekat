@@ -32,8 +32,8 @@ namespace ZI_projekat
         }
         public void test() //
         {
-            CTR test = new CTR();
-            test.Encrypt();
+        //    CTR test = new CTR();
+           // test.Encrypt();
            // test.LoadMainFile();
 
             
@@ -134,7 +134,12 @@ namespace ZI_projekat
                     BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
                     BitmapCrypter.EcryptAndSaveBitmap(@"" + PathToSave + "SuspiciousBitmap.bmp");
-
+                    break;
+                case "CTR (+ RC6)":                  
+                    CTR CTRCrypter = new CTR();
+                    CTRCrypter.LoadFile(LoadedFilePath);
+                    CTRCrypter.Encrypt();
+                    CTRCrypter.SaveFile(@"" + PathToSave + "EncodedCTR.txt");
                     break;
                 default:
                     break;
@@ -228,6 +233,12 @@ namespace ZI_projekat
                     BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
                     BitmapCrypter.DecryptAndSaveBitmap(@"" + PathToSave + "NewBitmap.bmp");
+                    break;
+                case "CTR (+ RC6)":
+                    CTR CTRCrypter = new CTR();
+                    CTRCrypter.LoadFile(LoadedFilePath);
+                    CTRCrypter.Decrypt();
+                    CTRCrypter.SaveFile(@"" + PathToSave + "DecodedCTR.txt");
                     break;
                 default:
                     break;

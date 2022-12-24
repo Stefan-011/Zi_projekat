@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -38,9 +39,8 @@ namespace ZI_projekat
 
         public void Encrypt()
         {
-            string plainText = "Dobar dan dobri ljudi sta ima. Kod nas je ovde hladno i pada kisa . Tuga .....";
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            int BrojBlokova = GetBlockNumber(plainText.Length);
+            byte[] plainBytes = LoadedData;
+            int BrojBlokova = GetBlockNumber(LoadedData.Length);
             byte[] SumBytes = BitConverter.GetBytes(this.Counter + this.Nonce);
             List<byte> plainByteExit = new List<byte>();
             AES.GenerateKey(Encoding.ASCII.GetBytes(key));
@@ -117,6 +117,50 @@ namespace ZI_projekat
             return BlockNumber;
             
         }
+
+        public void LoadFile(string filepath)
+        {
+            Byte[] buffer = null;
+
+            var fileName = filepath;
+            try
+            {
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+
+                long numBytes = new FileInfo(fileName).Length;
+                buffer = br.ReadBytes((int)numBytes);
+
+                br.Close();
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            LoadedData = buffer;
+        }
+
+        public void SaveFile(string filename)
+        {
+            try
+            {
+                FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.ReadWrite);
+                BinaryWriter bw = new BinaryWriter(fs);
+
+                for (int i = 0; i < CryptedData.Length; i++)
+                    bw.Write(CryptedData[i]);
+
+                bw.Close();
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
 
     }
 }

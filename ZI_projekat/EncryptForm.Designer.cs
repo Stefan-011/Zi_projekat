@@ -44,6 +44,9 @@
             // 
             // Input_textbox
             // 
+            this.Input_textbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Input_textbox.Font = new System.Drawing.Font("Lexend Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Input_textbox.Location = new System.Drawing.Point(474, 34);
             this.Input_textbox.Name = "Input_textbox";
@@ -53,6 +56,9 @@
             // 
             // Output_textbox
             // 
+            this.Output_textbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Output_textbox.Font = new System.Drawing.Font("Lexend Medium", 11.25F, System.Drawing.FontStyle.Bold);
             this.Output_textbox.Location = new System.Drawing.Point(474, 197);
             this.Output_textbox.Name = "Output_textbox";

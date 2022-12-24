@@ -185,7 +185,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Desktop_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(83)))), ((int)(((byte)(148)))));
-            this.Desktop_panel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Desktop_panel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Desktop_panel.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.Desktop_panel.Location = new System.Drawing.Point(147, 80);
             this.Desktop_panel.Name = "Desktop_panel";
             this.Desktop_panel.Size = new System.Drawing.Size(757, 488);
@@ -199,7 +200,7 @@
             this.Controls.Add(this.Desktop_panel);
             this.Controls.Add(this.FormName_panel);
             this.Controls.Add(this.MenuPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
