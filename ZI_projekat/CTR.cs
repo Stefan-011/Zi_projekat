@@ -31,6 +31,16 @@ namespace ZI_projekat
             key = "aaaaccccbbbbeeee";
         }
 
+        public void SetLoadedData(string data)
+        {
+            this.LoadedData = Encoding.ASCII.GetBytes(data);
+        }
+
+        public string GetCryptedData()
+        {
+            return Encoding.ASCII.GetString(CryptedData);
+        }
+
         public void SetKey(string NewKey)
         {
             if(NewKey.Length != 0)

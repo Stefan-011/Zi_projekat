@@ -153,16 +153,19 @@ namespace ZI_projekat
             int i;
             byte[] plainText = new byte[cipherText.Length];
             Console.WriteLine(cipherText.Length);
-            for (i = 0; i < cipherText.Length-12; i = i + 16)
+            for (i = 0; i < cipherText.Length; i = i + 16)
             {
 
                     A = BitConverter.ToUInt32(cipherText, i);
                     B = BitConverter.ToUInt32(cipherText, i + 4);
                     C = BitConverter.ToUInt32(cipherText, i + 8);
+                    if (i+12 < cipherText.Length)
                     D = BitConverter.ToUInt32(cipherText, i + 12);
-            
- 
-                
+                    else
+                    D = BitConverter.ToUInt32(cipherText, i);
+
+
+
                 C = C - Key[2 * R + 3];
                 A = A - Key[2 * R + 2];
 
