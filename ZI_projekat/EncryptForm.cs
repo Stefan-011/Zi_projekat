@@ -126,7 +126,7 @@ namespace ZI_projekat
                     }
 
                     break;
-                case "Bitmap (+PC6)":
+                case "Bitmap (+RC6)":
                     RC6 BitmapCrypter = new RC6();
                     BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
@@ -289,7 +289,7 @@ namespace ZI_projekat
                     }
                     Output_textbox.Text = output;
                     break;
-                case "Bitmap (+PC6)":
+                case "Bitmap (+RC6)":
                     RC6 BitmapCrypter = new RC6();
                     BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
