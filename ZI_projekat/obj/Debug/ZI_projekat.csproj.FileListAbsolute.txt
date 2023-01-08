@@ -26,3 +26,5 @@ C:\Users\Stefan\Desktop\Projects\ZI_projekat\Zi_projekat\Zi_projekat\ZI_projekat
 C:\Users\Stefan\Desktop\Projects\ZI_projekat\Zi_projekat\Zi_projekat\ZI_projekat\obj\Debug\ZI_projekat.pdb
 C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\bin\Debug\SuperSimpleTcp.dll
 C:\Users\Stefan\Desktop\Projekti\ZI projekat\ZI_projekat\ZI_projekat\obj\Debug\ZI_projekat.csproj.CopyComplete
+C:\Users\Stefan\Desktop\Projects\ZI_projekat\Zi_projekat\Zi_projekat\ZI_projekat\bin\Debug\SuperSimpleTcp.dll
+C:\Users\Stefan\Desktop\Projects\ZI_projekat\Zi_projekat\Zi_projekat\ZI_projekat\obj\Debug\ZI_projekat.csproj.CopyComplete

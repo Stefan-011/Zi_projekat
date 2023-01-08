@@ -28,6 +28,8 @@ namespace ZI_projekat
             label_loaded_file2.Visible = false;
             open_file_btn2.Visible = false;
             Compare_btn.Visible = false;
+            Enc_text_btn.Visible = false;
+            Dec_text_btn.Visible = false;
             test();
         }
         public void test() //
@@ -100,8 +102,6 @@ namespace ZI_projekat
                     Crypter.EncryptFile();                   
                     Crypter.SaveFile(@""+PathToSave+"EncodedRC6.txt");
 
-                    Input_textbox.Text = Encoding.UTF8.GetString(Crypter.GetLoadedData());
-                    Output_textbox.Text = Encoding.UTF8.GetString(Crypter.GetChangedData());
                     break;
                 case "Bifid":
                     Bifid BifidCrypter = new Bifid();
@@ -110,9 +110,6 @@ namespace ZI_projekat
                     BifidCrypter.ReadFile(LoadedFilePath);
                     BifidCrypter.EncryptFile();
                     BifidCrypter.SaveFile(@"" + PathToSave + "EncodedBifid.txt");
-
-                    Input_textbox.Text = (BifidCrypter.GetLoadedText());                 
-                    Output_textbox.Text = (BifidCrypter.GetCipherText());
                  
                     break;
                 case "Knapsack":
@@ -121,15 +118,15 @@ namespace ZI_projekat
                     KnapsackCrypter.ReadFile(LoadedFilePath);
                     KnapsackCrypter.EncryptFile();
                     KnapsackCrypter.SaveFile(@"" + PathToSave + "EncodedKnapsack.txt");
-                    Input_textbox.Text = Encoding.UTF8.GetString(KnapsackCrypter.GetReadBinary());
+
                     string output = "";
                     foreach (var item in KnapsackCrypter.GetCipherInt())
                     {
                         output += item+" ";
                     }
-                    Output_textbox.Text = output;
+
                     break;
-                case "Bitmap (+PC6)":
+                case "Bitmap (+RC6)":
                     RC6 BitmapCrypter = new RC6();
                     BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
@@ -163,6 +160,70 @@ namespace ZI_projekat
                 Decrypt_btn.Visible = true;
                 Encrypt_btn.Visible = true;
                 Compare_btn.Visible = false;
+            }
+            if(Alg_cmbox.Text == "Bifid" || Alg_cmbox.Text == "Knapsack")
+            {
+                Enc_text_btn.Visible = true;
+                Dec_text_btn.Visible = true;
+            }
+            else
+            {
+                Enc_text_btn.Visible = false;
+                Dec_text_btn.Visible = false;
+            }
+        }
+
+        private void Enc_text_btn_Click(object sender, EventArgs e)
+        {
+            switch (Alg_cmbox.Text)
+            {
+                case "Bifid":
+                    Bifid BifidCrypter = new Bifid();
+                    BifidCrypter.Set_key(Key_textBox.Text);
+                    BifidCrypter.GenerateKey();
+                    Output_textbox.Text = BifidCrypter.Encrypt(Input_textbox.Text).ToString();
+                    break;
+                case "Knapsack":
+                    Knapsack KnapsackCrypter = new Knapsack();
+                    string[] nums = Key_textBox.Text.Split(',');
+                    KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
+                    int[] Result = KnapsackCrypter.Encrypt(Encoding.ASCII.GetBytes(Input_textbox.Text));
+
+                    string output = "";
+                    foreach (var item in Result)
+                    {
+                        output += item + " ";
+                    }
+                    Output_textbox.Text = output;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Dec_text_btn_Click(object sender, EventArgs e)
+        {
+            switch (Alg_cmbox.Text)
+            {
+                case "Bifid":
+                    Bifid BifidCrypter = new Bifid();
+                    BifidCrypter.Set_key(Key_textBox.Text);
+                    BifidCrypter.GenerateKey();
+                    char[] Result = BifidCrypter.Decrypt(Input_textbox.Text);
+                    foreach (var item in Result)
+                    {
+                        Output_textbox.Text +=item;
+
+                    }             
+                    break;
+                case "Knapsack":
+                    Knapsack KnapsackCrypter = new Knapsack();
+                    string[] nums = Key_textBox.Text.Split(',');
+                    KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
+                    Output_textbox.Text = KnapsackCrypter.Decrypt(Input_textbox.Text);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -228,7 +289,7 @@ namespace ZI_projekat
                     }
                     Output_textbox.Text = output;
                     break;
-                case "Bitmap (+PC6)":
+                case "Bitmap (+RC6)":
                     RC6 BitmapCrypter = new RC6();
                     BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
