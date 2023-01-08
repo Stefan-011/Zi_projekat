@@ -44,14 +44,18 @@
             this.Dec_text_btn = new System.Windows.Forms.Button();
             this.Key_textBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.fileKey_textbox = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Input_textbox
             // 
-            this.Input_textbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.Input_textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Input_textbox.Location = new System.Drawing.Point(711, 52);
+            this.Input_textbox.Location = new System.Drawing.Point(655, 14);
             this.Input_textbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Input_textbox.Name = "Input_textbox";
             this.Input_textbox.Size = new System.Drawing.Size(380, 182);
@@ -60,10 +64,8 @@
             // 
             // Output_textbox
             // 
-            this.Output_textbox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.Output_textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.Output_textbox.Location = new System.Drawing.Point(711, 303);
+            this.Output_textbox.Location = new System.Drawing.Point(655, 283);
             this.Output_textbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Output_textbox.Name = "Output_textbox";
             this.Output_textbox.Size = new System.Drawing.Size(380, 182);
@@ -81,7 +83,7 @@
             "CTR (+ RC6)",
             "Bitmap (+RC6)",
             "Tiger hash"});
-            this.Alg_cmbox.Location = new System.Drawing.Point(57, 66);
+            this.Alg_cmbox.Location = new System.Drawing.Point(28, 29);
             this.Alg_cmbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Alg_cmbox.Name = "Alg_cmbox";
             this.Alg_cmbox.Size = new System.Drawing.Size(253, 37);
@@ -91,7 +93,7 @@
             // Encrypt_btn
             // 
             this.Encrypt_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.Encrypt_btn.Location = new System.Drawing.Point(57, 189);
+            this.Encrypt_btn.Location = new System.Drawing.Point(28, 112);
             this.Encrypt_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Encrypt_btn.Name = "Encrypt_btn";
             this.Encrypt_btn.Size = new System.Drawing.Size(240, 62);
@@ -103,7 +105,7 @@
             // Decrypt_btn
             // 
             this.Decrypt_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.Decrypt_btn.Location = new System.Drawing.Point(57, 303);
+            this.Decrypt_btn.Location = new System.Drawing.Point(28, 208);
             this.Decrypt_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Decrypt_btn.Name = "Decrypt_btn";
             this.Decrypt_btn.Size = new System.Drawing.Size(240, 62);
@@ -114,8 +116,9 @@
             // 
             // open_file_btn
             // 
+            this.open_file_btn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.open_file_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.open_file_btn.Location = new System.Drawing.Point(72, 595);
+            this.open_file_btn.Location = new System.Drawing.Point(18, 58);
             this.open_file_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.open_file_btn.Name = "open_file_btn";
             this.open_file_btn.Size = new System.Drawing.Size(210, 54);
@@ -130,9 +133,10 @@
             // 
             // label_loaded_file
             // 
+            this.label_loaded_file.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label_loaded_file.AutoSize = true;
             this.label_loaded_file.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_loaded_file.Location = new System.Drawing.Point(66, 542);
+            this.label_loaded_file.Location = new System.Drawing.Point(13, 22);
             this.label_loaded_file.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_loaded_file.Name = "label_loaded_file";
             this.label_loaded_file.Size = new System.Drawing.Size(72, 25);
@@ -141,8 +145,9 @@
             // 
             // open_file_btn2
             // 
+            this.open_file_btn2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.open_file_btn2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.open_file_btn2.Location = new System.Drawing.Point(369, 595);
+            this.open_file_btn2.Location = new System.Drawing.Point(278, 58);
             this.open_file_btn2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.open_file_btn2.Name = "open_file_btn2";
             this.open_file_btn2.Size = new System.Drawing.Size(210, 54);
@@ -153,9 +158,10 @@
             // 
             // label_loaded_file2
             // 
+            this.label_loaded_file2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label_loaded_file2.AutoSize = true;
             this.label_loaded_file2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_loaded_file2.Location = new System.Drawing.Point(363, 542);
+            this.label_loaded_file2.Location = new System.Drawing.Point(273, 22);
             this.label_loaded_file2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_loaded_file2.Name = "label_loaded_file2";
             this.label_loaded_file2.Size = new System.Drawing.Size(72, 25);
@@ -165,7 +171,7 @@
             // Compare_btn
             // 
             this.Compare_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.Compare_btn.Location = new System.Drawing.Point(207, 426);
+            this.Compare_btn.Location = new System.Drawing.Point(28, 326);
             this.Compare_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Compare_btn.Name = "Compare_btn";
             this.Compare_btn.Size = new System.Drawing.Size(240, 62);
@@ -180,9 +186,8 @@
             // 
             // Enc_text_btn
             // 
-            this.Enc_text_btn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Enc_text_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.Enc_text_btn.Location = new System.Drawing.Point(711, 244);
+            this.Enc_text_btn.Location = new System.Drawing.Point(655, 217);
             this.Enc_text_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Enc_text_btn.Name = "Enc_text_btn";
             this.Enc_text_btn.Size = new System.Drawing.Size(190, 45);
@@ -193,9 +198,8 @@
             // 
             // Dec_text_btn
             // 
-            this.Dec_text_btn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Dec_text_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold);
-            this.Dec_text_btn.Location = new System.Drawing.Point(911, 244);
+            this.Dec_text_btn.Location = new System.Drawing.Point(855, 217);
             this.Dec_text_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Dec_text_btn.Name = "Dec_text_btn";
             this.Dec_text_btn.Size = new System.Drawing.Size(180, 45);
@@ -206,38 +210,76 @@
             // 
             // Key_textBox
             // 
-            this.Key_textBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Key_textBox.Font = new System.Drawing.Font("Lexend Medium", 13F, System.Drawing.FontStyle.Bold);
-            this.Key_textBox.Location = new System.Drawing.Point(770, 583);
+            this.Key_textBox.Location = new System.Drawing.Point(707, 511);
             this.Key_textBox.Name = "Key_textBox";
             this.Key_textBox.Size = new System.Drawing.Size(280, 40);
             this.Key_textBox.TabIndex = 12;
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lexend SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(877, 542);
+            this.label1.Location = new System.Drawing.Point(814, 470);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 38);
             this.label1.TabIndex = 13;
             this.label1.Text = "Key";
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Lexend SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(115, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(63, 38);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Key";
+            // 
+            // fileKey_textbox
+            // 
+            this.fileKey_textbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fileKey_textbox.Font = new System.Drawing.Font("Lexend Medium", 13F, System.Drawing.FontStyle.Bold);
+            this.fileKey_textbox.Location = new System.Drawing.Point(21, 71);
+            this.fileKey_textbox.Name = "fileKey_textbox";
+            this.fileKey_textbox.Size = new System.Drawing.Size(280, 40);
+            this.fileKey_textbox.TabIndex = 15;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.fileKey_textbox);
+            this.groupBox1.Location = new System.Drawing.Point(306, 14);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(325, 161);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label_loaded_file);
+            this.groupBox2.Controls.Add(this.open_file_btn);
+            this.groupBox2.Controls.Add(this.label_loaded_file2);
+            this.groupBox2.Controls.Add(this.open_file_btn2);
+            this.groupBox2.Location = new System.Drawing.Point(28, 396);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(603, 181);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            // 
             // EncryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.ClientSize = new System.Drawing.Size(1061, 692);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Key_textBox);
             this.Controls.Add(this.Dec_text_btn);
             this.Controls.Add(this.Enc_text_btn);
             this.Controls.Add(this.Compare_btn);
-            this.Controls.Add(this.label_loaded_file2);
-            this.Controls.Add(this.open_file_btn2);
-            this.Controls.Add(this.label_loaded_file);
-            this.Controls.Add(this.open_file_btn);
             this.Controls.Add(this.Decrypt_btn);
             this.Controls.Add(this.Encrypt_btn);
             this.Controls.Add(this.Alg_cmbox);
@@ -246,6 +288,10 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "EncryptForm";
             this.Text = "EncryptForm";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,5 +315,9 @@
         private System.Windows.Forms.Button Dec_text_btn;
         private System.Windows.Forms.TextBox Key_textBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox fileKey_textbox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

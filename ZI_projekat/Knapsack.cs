@@ -77,7 +77,6 @@ namespace ZI_projekat
 
         public int[] Encrypt(byte[] PlainText)
         {
-            //byte[] RawBytes = Encoding.ASCII.GetBytes(PlainText);
             byte[] RawBytes = PlainText;
             int 
                 size = private_key.Length,
@@ -111,8 +110,7 @@ namespace ZI_projekat
             int InverseModuo = FindInverseModuo(n, m);
             
           string[] Numbers =  PlainText.Split(' ');
-          List<int> Array = new List<int>();
-          List<string> byteList = new List<string>();
+            List<int> Array = new List<int>();
           List<int[]> Helper = new List<int[]>();
             foreach (var item in Numbers)
             {

@@ -97,7 +97,10 @@ namespace ZI_projekat
             {
                 case "RC6":
                     RC6 Crypter = new RC6();
-                    Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    string KeyRC6 = fileKey_textbox.Text;
+                    if (KeyRC6.Length == 0)
+                        KeyRC6 = "aaaaccccbbbbeeee";
+                    Crypter.GenerateKey(Encoding.ASCII.GetBytes(KeyRC6));
                     Crypter.ReadFile(LoadedFilePath);
                     Crypter.EncryptFile();                   
                     Crypter.SaveFile(@""+PathToSave+"EncodedRC6.txt");
@@ -105,7 +108,10 @@ namespace ZI_projekat
                     break;
                 case "Bifid":
                     Bifid BifidCrypter = new Bifid();
-                    BifidCrypter.Set_key("arikspyvxnuhfcqzemgwdbtol");
+                    string KeyBifid = fileKey_textbox.Text;
+                    if (KeyBifid.Length == 0)
+                        KeyBifid = "arikspyvxnuhfcqzemgwdbtol";
+                    BifidCrypter.Set_key(KeyBifid);
                     BifidCrypter.GenerateKey();                
                     BifidCrypter.ReadFile(LoadedFilePath);
                     BifidCrypter.EncryptFile();
@@ -114,7 +120,17 @@ namespace ZI_projekat
                     break;
                 case "Knapsack":
                     Knapsack KnapsackCrypter = new Knapsack();
+                    string[] nums = new string[3];
+                    nums = Key_textBox.Text.Split(',');
+
+                    if (nums.Length < 2)
+                    {
+                        nums = new string[2];
+                        nums[0] = "1";
+                        nums[1] = "5";
+                    }
                     KnapsackCrypter.GenerateKeys(1, 5);
+                   // KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
                     KnapsackCrypter.ReadFile(LoadedFilePath);
                     KnapsackCrypter.EncryptFile();
                     KnapsackCrypter.SaveFile(@"" + PathToSave + "EncodedKnapsack.txt");
@@ -128,12 +144,19 @@ namespace ZI_projekat
                     break;
                 case "Bitmap (+RC6)":
                     RC6 BitmapCrypter = new RC6();
-                    BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    string KeyRC6Bitmap = fileKey_textbox.Text;
+                    if (KeyRC6Bitmap.Length == 0)
+                        KeyRC6Bitmap = "aaaaccccbbbbeeee";
+                    BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes(KeyRC6Bitmap));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
                     BitmapCrypter.EcryptAndSaveBitmap(@"" + PathToSave + "SuspiciousBitmap.bmp");
                     break;
                 case "CTR (+ RC6)":                  
                     CTR CTRCrypter = new CTR();
+                    string KeyRC6CTR = fileKey_textbox.Text;
+                    if (KeyRC6CTR.Length == 0)
+                        KeyRC6CTR = "aaaaccccbbbbeeee";
+                    CTRCrypter.SetKey(KeyRC6CTR);
                     CTRCrypter.LoadFile(LoadedFilePath);
                     CTRCrypter.Encrypt();
                     CTRCrypter.SaveFile(@"" + PathToSave + "EncodedCTR.txt");
@@ -253,7 +276,10 @@ namespace ZI_projekat
             {
                 case "RC6":
                     RC6 RC6Crypter = new RC6();
-                    RC6Crypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    string KeyRC6 = fileKey_textbox.Text;
+                    if (KeyRC6.Length == 0)
+                        KeyRC6 = "aaaaccccbbbbeeee";
+                    RC6Crypter.GenerateKey(Encoding.ASCII.GetBytes(KeyRC6));
                     RC6Crypter.ReadFile(LoadedFilePath);
                     RC6Crypter.DecryptFile();
                     RC6Crypter.SaveFile(@"" + PathToSave + "DecodedRC6.txt");
@@ -264,7 +290,10 @@ namespace ZI_projekat
                     break;
                 case "Bifid":
                     Bifid BifidCrypter = new Bifid();
-                    BifidCrypter.Set_key("arikspyvxnuhfcqzemgwdbtol");
+                    string KeyBifid = fileKey_textbox.Text;
+                    if (KeyBifid.Length == 0)
+                        KeyBifid = "arikspyvxnuhfcqzemgwdbtol";
+                    BifidCrypter.Set_key(KeyBifid);
                     BifidCrypter.GenerateKey();                
                     BifidCrypter.ReadFile(LoadedFilePath);                  
                     BifidCrypter.DecryptFile();
@@ -276,7 +305,15 @@ namespace ZI_projekat
                     break;
                 case "Knapsack":
                     Knapsack KnapsackCrypter = new Knapsack();
+                    string[] nums = Key_textBox.Text.Split(',');
+
+                    if (nums.Length == 0)
+                    {
+                        nums[0] = "1";
+                        nums[1] = "5";
+                    }
                     KnapsackCrypter.GenerateKeys(1, 5);
+                    //KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
                     KnapsackCrypter.ReadFile(LoadedFilePath);
                     KnapsackCrypter.DecryptFile();
                     KnapsackCrypter.SaveFile(@"" + PathToSave + "DecodedKnapsack.txt");
@@ -291,12 +328,19 @@ namespace ZI_projekat
                     break;
                 case "Bitmap (+RC6)":
                     RC6 BitmapCrypter = new RC6();
-                    BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes("aaaaccccbbbbeeee"));
+                    string KeyRC6Bitmap = fileKey_textbox.Text;
+                    if (KeyRC6Bitmap.Length == 0)
+                        KeyRC6Bitmap = "aaaaccccbbbbeeee";
+                    BitmapCrypter.GenerateKey(Encoding.ASCII.GetBytes(KeyRC6Bitmap));
                     BitmapCrypter.ReadBitmap(LoadedFilePath);
                     BitmapCrypter.DecryptAndSaveBitmap(@"" + PathToSave + "NewBitmap.bmp");
                     break;
                 case "CTR (+ RC6)":
                     CTR CTRCrypter = new CTR();
+                    string KeyRC6CTR = fileKey_textbox.Text;
+                    if (KeyRC6CTR.Length == 0)
+                        KeyRC6CTR = "aaaaccccbbbbeeee";
+                    CTRCrypter.SetKey(KeyRC6CTR);
                     CTRCrypter.LoadFile(LoadedFilePath);
                     CTRCrypter.Decrypt();
                     CTRCrypter.SaveFile(@"" + PathToSave + "DecodedCTR.txt");
