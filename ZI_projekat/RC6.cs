@@ -191,7 +191,14 @@ namespace ZI_projekat
                 
                 block.CopyTo(plainText, i);
             }
-            return plainText;
+
+            List<byte> CleanPlaintext = new List<byte>();
+            foreach (var item in plainText)
+            {
+                if(item != 0)
+                CleanPlaintext.Add(item);
+            }
+            return CleanPlaintext.ToArray();
         }
 
         public void ReadFile(string filename)
@@ -325,6 +332,7 @@ namespace ZI_projekat
         public void EcryptAndSaveBitmap(string filename)
         {
             byte[] EcryptedBitmap = EncryptBITMAP(LoadedBitmap);
+
             File.WriteAllBytes(filename, EcryptedBitmap);
         }
 
@@ -336,7 +344,10 @@ namespace ZI_projekat
         public void DecryptAndSaveBitmap(string filename)
         {
             byte[] EcryptedBitmap = DecryptBitmap(LoadedBitmap);
+
             File.WriteAllBytes(filename, EcryptedBitmap);
         }
+
+        
     }
 }

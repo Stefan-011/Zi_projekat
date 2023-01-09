@@ -54,7 +54,7 @@ namespace ZI_projekat
             byte[] SumBytes = BitConverter.GetBytes(this.Counter + this.Nonce);
             List<byte> plainByteExit = new List<byte>();
             AES.GenerateKey(Encoding.ASCII.GetBytes(key));
-            while (BrojBlokova >  Counter )
+            while (BrojBlokova >  Counter)
             {
                 byte[] Result = AES.Encrypt(SumBytes.ToString());
 
