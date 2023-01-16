@@ -278,7 +278,7 @@ namespace ZI_projekat
 
                 A = BitConverter.ToUInt32(text, i);
                 B = BitConverter.ToUInt32(text, i + 4);
-                C = BitConverter.ToUInt32(text, i + 8);
+                C = BitConverter.ToUInt32(text, i + 8);               
                 D = BitConverter.ToUInt32(text, i + 12);
 
                 B = B + Key[0];
@@ -311,15 +311,65 @@ namespace ZI_projekat
             return cipherText;
         }
 
+        public byte[] DecryptBITMAP(byte[] cipherText)
+        {
+            uint A, B, C, D;
+            int i;
+            byte[] plainText = new byte[cipherText.Length];
+            Console.WriteLine(cipherText.Length);
+            for (i = 0; i < cipherText.Length; i = i + 16)
+            {
+
+                A = BitConverter.ToUInt32(cipherText, i);
+                B = BitConverter.ToUInt32(cipherText, i + 4);
+                C = BitConverter.ToUInt32(cipherText, i + 8);
+                if (i + 12 < cipherText.Length)
+                    D = BitConverter.ToUInt32(cipherText, i + 12);
+                else
+                    D = BitConverter.ToUInt32(cipherText, i);
+
+
+
+                C = C - Key[2 * R + 3];
+                A = A - Key[2 * R + 2];
+
+                for (int j = R; j >= 1; j--)
+                {
+                    uint temp = D;
+                    D = C;
+                    C = B;
+                    B = A;
+                    A = temp;
+
+                    uint u = LeftShift((D * (2 * D + 1)), (int)Math.Log(W, 2));
+                    uint t = LeftShift((B * (2 * B + 1)), (int)Math.Log(W, 2));
+
+                    C = RightShift((C - Key[2 * j + 1]), (int)t) ^ u;
+                    A = RightShift((A - Key[2 * j]), (int)u) ^ t;
+                }
+                D = D - Key[1];
+                B = B - Key[0];
+
+                uint[] tempWords = new uint[4] { A, B, C, D };
+                byte[] block = ConvertFromUInt32ToByteArray(tempWords);
+
+                block.CopyTo(plainText, i);
+            }
+
+
+            return plainText;
+        }
+
+
         private byte[] DecryptBitmap(Bitmap bmp)
         {
             ImageConverter converter = new ImageConverter();
             byte[] byteText = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
-            var header = byteText.Take(54).ToArray();
-            byte[] retval;
+            var header = byteText.Take(54).ToArray();     
             byteText = byteText.Skip(54).ToArray();
-            retval = Combine(header,Decrypt(byteText));
-            return retval;
+            //byte[] retval;
+            //retval = ;
+            return Combine(header, DecryptBITMAP(byteText));
         }
         public static byte[] Combine(byte[] first, byte[] second)
         {
