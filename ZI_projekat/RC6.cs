@@ -19,7 +19,7 @@ namespace ZI_projekat
         private byte[] LoadedData;
         private byte[] ChangedData;
         private Bitmap LoadedBitmap;
-        //private Bitmap ChangedBitmap;
+     
 
 
         public byte[] GetLoadedData()
@@ -367,8 +367,7 @@ namespace ZI_projekat
             byte[] byteText = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
             var header = byteText.Take(54).ToArray();     
             byteText = byteText.Skip(54).ToArray();
-            //byte[] retval;
-            //retval = ;
+
             return Combine(header, DecryptBITMAP(byteText));
         }
         public static byte[] Combine(byte[] first, byte[] second)

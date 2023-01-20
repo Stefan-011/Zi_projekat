@@ -18,7 +18,6 @@ namespace ZI_projekat
             hashSize = 192,
             msgBlkSizeBit = 512,
             msgBlkSizeByte = 64;
-        public ulong dataSize;
         private ulong[] x;
         private int blockHashed;
 
@@ -60,11 +59,11 @@ namespace ZI_projekat
 
         public static void AppendBytes(ref byte[] dst, byte[] src)
         {
-            int oldLength = dst.Length;
+            int oldlen = dst.Length;
             Array.Resize(ref dst, dst.Length + src.Length);
             for (int j = 0; j < src.Length; j++)
             {
-                dst[oldLength + j] = src[j];
+                dst[oldlen + j] = src[j];
             }
         }
 
@@ -141,7 +140,7 @@ namespace ZI_projekat
         private void HashFinalMsgBlk(byte[] finalBytes, int numOfFinalBytes, int messageSizeWithoutPadding)
         {
             if (numOfFinalBytes < 0 || numOfFinalBytes > 64)
-                throw new ArgumentException("numofFinalBytes mora biti izmedju [0, 64]");
+                throw new ArgumentException();
 
             if (numOfFinalBytes < 56)
             {
@@ -217,7 +216,7 @@ namespace ZI_projekat
             AppendBytes(ref result, registerC);
 
             if (result.Length != 24)
-                throw new Exception("Rezultat mora biti 24 byte-a.");
+                throw new Exception();
 
             return result;
         }

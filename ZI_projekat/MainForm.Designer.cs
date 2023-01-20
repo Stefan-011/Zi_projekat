@@ -48,10 +48,9 @@
             this.MenuPanel.Controls.Add(this.EncryptForm_btn);
             this.MenuPanel.Controls.Add(this.ChatForm_btn);
             this.MenuPanel.Controls.Add(this.LogoPanel);
-            this.MenuPanel.Location = new System.Drawing.Point(-3, 0);
-            this.MenuPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MenuPanel.Location = new System.Drawing.Point(-2, 0);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(224, 874);
+            this.MenuPanel.Size = new System.Drawing.Size(149, 568);
             this.MenuPanel.TabIndex = 0;
             // 
             // EncryptForm_btn
@@ -64,10 +63,10 @@
             this.EncryptForm_btn.ForeColor = System.Drawing.Color.White;
             this.EncryptForm_btn.Image = ((System.Drawing.Image)(resources.GetObject("EncryptForm_btn.Image")));
             this.EncryptForm_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.EncryptForm_btn.Location = new System.Drawing.Point(0, 305);
-            this.EncryptForm_btn.Margin = new System.Windows.Forms.Padding(75, 77, 75, 77);
+            this.EncryptForm_btn.Location = new System.Drawing.Point(0, 198);
+            this.EncryptForm_btn.Margin = new System.Windows.Forms.Padding(50, 50, 50, 50);
             this.EncryptForm_btn.Name = "EncryptForm_btn";
-            this.EncryptForm_btn.Size = new System.Drawing.Size(225, 115);
+            this.EncryptForm_btn.Size = new System.Drawing.Size(150, 75);
             this.EncryptForm_btn.TabIndex = 2;
             this.EncryptForm_btn.Text = "Encrypt";
             this.EncryptForm_btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -85,10 +84,9 @@
             this.ChatForm_btn.ForeColor = System.Drawing.Color.White;
             this.ChatForm_btn.Image = ((System.Drawing.Image)(resources.GetObject("ChatForm_btn.Image")));
             this.ChatForm_btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ChatForm_btn.Location = new System.Drawing.Point(0, 157);
-            this.ChatForm_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ChatForm_btn.Location = new System.Drawing.Point(0, 102);
             this.ChatForm_btn.Name = "ChatForm_btn";
-            this.ChatForm_btn.Size = new System.Drawing.Size(225, 115);
+            this.ChatForm_btn.Size = new System.Drawing.Size(150, 75);
             this.ChatForm_btn.TabIndex = 0;
             this.ChatForm_btn.Text = "Chat";
             this.ChatForm_btn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -103,9 +101,8 @@
             this.LogoPanel.Cursor = System.Windows.Forms.Cursors.Default;
             this.LogoPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.LogoPanel.Location = new System.Drawing.Point(0, 0);
-            this.LogoPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LogoPanel.Name = "LogoPanel";
-            this.LogoPanel.Size = new System.Drawing.Size(224, 123);
+            this.LogoPanel.Size = new System.Drawing.Size(149, 80);
             this.LogoPanel.TabIndex = 1;
             // 
             // FormName_panel
@@ -114,10 +111,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FormName_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(37)))), ((int)(((byte)(70)))));
             this.FormName_panel.Controls.Add(this.FormName_label);
-            this.FormName_panel.Location = new System.Drawing.Point(220, 0);
-            this.FormName_panel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.FormName_panel.Location = new System.Drawing.Point(147, 0);
             this.FormName_panel.Name = "FormName_panel";
-            this.FormName_panel.Size = new System.Drawing.Size(1160, 126);
+            this.FormName_panel.Size = new System.Drawing.Size(773, 82);
             this.FormName_panel.TabIndex = 1;
             // 
             // FormName_label
@@ -126,10 +122,9 @@
             this.FormName_label.AutoSize = true;
             this.FormName_label.Font = new System.Drawing.Font("Lexend", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormName_label.ForeColor = System.Drawing.Color.White;
-            this.FormName_label.Location = new System.Drawing.Point(309, 0);
-            this.FormName_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.FormName_label.Location = new System.Drawing.Point(206, 0);
             this.FormName_label.Name = "FormName_label";
-            this.FormName_label.Size = new System.Drawing.Size(377, 114);
+            this.FormName_label.Size = new System.Drawing.Size(255, 77);
             this.FormName_label.TabIndex = 0;
             this.FormName_label.Text = "Welcome";
             // 
@@ -141,23 +136,22 @@
             this.Desktop_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(83)))), ((int)(((byte)(148)))));
             this.Desktop_panel.Cursor = System.Windows.Forms.Cursors.Default;
             this.Desktop_panel.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.Desktop_panel.Location = new System.Drawing.Point(220, 119);
-            this.Desktop_panel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Desktop_panel.Location = new System.Drawing.Point(147, 77);
             this.Desktop_panel.Name = "Desktop_panel";
-            this.Desktop_panel.Size = new System.Drawing.Size(1366, 904);
+            this.Desktop_panel.Size = new System.Drawing.Size(911, 588);
             this.Desktop_panel.TabIndex = 2;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 872);
+            this.ClientSize = new System.Drawing.Size(919, 567);
             this.Controls.Add(this.Desktop_panel);
             this.Controls.Add(this.FormName_panel);
             this.Controls.Add(this.MenuPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";

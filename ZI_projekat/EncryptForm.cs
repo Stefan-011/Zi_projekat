@@ -30,21 +30,8 @@ namespace ZI_projekat
             Compare_btn.Visible = false;
             Enc_text_btn.Visible = false;
             Dec_text_btn.Visible = false;
-            test();
         }
-        public void test() //
-        {
-        //    CTR test = new CTR();
-           // test.Encrypt();
-           // test.LoadMainFile();
-
-            
-        }
-
-
-       
-
-
+      
 
         public byte[] citajbitar(string filenamez)
         {
@@ -130,10 +117,9 @@ namespace ZI_projekat
                         nums[1] = "5";
                     }
                     KnapsackCrypter.GenerateKeys(1, 5);
-                   // KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
                     KnapsackCrypter.ReadFile(LoadedFilePath);
                     KnapsackCrypter.EncryptFile();
-                    KnapsackCrypter.SaveFile(@"" + PathToSave + "EncodedKnapsack.txt");
+                    KnapsackCrypter.SaveFile(@"" + PathToSave + "EncodedKnapsack.bin");
 
                     string output = "";
                     foreach (var item in KnapsackCrypter.GetCipherInt())
@@ -201,12 +187,19 @@ namespace ZI_projekat
             switch (Alg_cmbox.Text)
             {
                 case "Bifid":
-                    Bifid BifidCrypter = new Bifid();
+                    Output_textbox.Text = "";
+                   Bifid BifidCrypter = new Bifid();
                     BifidCrypter.Set_key(Key_textBox.Text);
                     BifidCrypter.GenerateKey();
-                    Output_textbox.Text = BifidCrypter.Encrypt(Input_textbox.Text).ToString();
+                    char[] ResultB = BifidCrypter.Encrypt(Input_textbox.Text);
+                    foreach (var item in ResultB)
+                    {
+                        Output_textbox.Text += item;
+
+                    }
                     break;
                 case "Knapsack":
+                    Output_textbox.Text = "";
                     Knapsack KnapsackCrypter = new Knapsack();
                     string[] nums = Key_textBox.Text.Split(',');
                     KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
@@ -229,6 +222,7 @@ namespace ZI_projekat
             switch (Alg_cmbox.Text)
             {
                 case "Bifid":
+                    Output_textbox.Text = "";
                     Bifid BifidCrypter = new Bifid();
                     BifidCrypter.Set_key(Key_textBox.Text);
                     BifidCrypter.GenerateKey();
@@ -240,6 +234,7 @@ namespace ZI_projekat
                     }             
                     break;
                 case "Knapsack":
+                    Output_textbox.Text = "";
                     Knapsack KnapsackCrypter = new Knapsack();
                     string[] nums = Key_textBox.Text.Split(',');
                     KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
@@ -313,10 +308,9 @@ namespace ZI_projekat
                         nums[1] = "5";
                     }
                     KnapsackCrypter.GenerateKeys(1, 5);
-                    //KnapsackCrypter.GenerateKeys(Int32.Parse(nums[0]), Int32.Parse(nums[1]));
                     KnapsackCrypter.ReadFile(LoadedFilePath);
                     KnapsackCrypter.DecryptFile();
-                    KnapsackCrypter.SaveFile(@"" + PathToSave + "DecodedKnapsack.txt");
+                    KnapsackCrypter.SaveFile(@"" + PathToSave + "DecodedKnapsack.bin");
 
                     Input_textbox.Text = (KnapsackCrypter.GetReadText());
                     string output= "";
